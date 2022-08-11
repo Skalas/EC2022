@@ -2,7 +2,7 @@
 #+title: Estadística Computacional
 #+email: miguel.escalante@itam.mx
 * Introducción
-Este es el repositorio con el contenido del curso Estadística Computacional  de la Maestría en Ciencia de Datos del ITAM impartido por el Prof. Miguel Escalante
+Este es el repositorio con el contenido del curso Estadística Computacional  de la Maestría en Ciencia de Datos del ITAM impartido por el Prof. Miguel Escalante.
 
 * El Curso
 
@@ -33,7 +33,7 @@ El objetivo en pocas palabras es que construyan capacidades técnicas de program
 ** Correo
 Escribe a ~miguel.escalante@itam.mx~ y por favor que el subject del correo diga ~[Estadística Computacional 2021]~.
 ** Discord
-
+[[https://discord.gg/qy3xhcTk][Piquele aquí]]
 * Temario
 
 - Git + Github + Git flow
