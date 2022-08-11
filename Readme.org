@@ -1,6 +1,8 @@
 #+Author: Prof. Miguel Angel Escalante Serrato
 #+title: Estadística Computacional
 #+email: miguel.escalante@itam.mx
+* Introducción
+Este es el repositorio con el contenido del curso Estadística Computacional  de la Maestría en Ciencia de Datos del ITAM impartido por el Prof. Miguel Escalante
 
 * El Curso
 
@@ -12,12 +14,11 @@
  - El alumno se familiarizará con los conceptos base de la nube.
  - El alumno se familiarizará con Docker y herramientas de contenedores.
  - El alumno estará cómodo generando consultas complejas de SQL.
-
-* Comunicación
-
-** Correo
-Escribe a ~miguel.escalante@itam.mx~ y por favor que el subject del correo diga ~[Estadística Computacional 2021]~.
-** Discord
+** ¿Meaning?
+El objetivo en pocas palabras es que construyan capacidades técnicas de programación básicas para afrontar problemas asociados a la ciencia de datos, este es un curso introductorio pero me gusta profundizar en los temas que vemos, por lo que ...
+#+name: Welcome
+#+attr_html: :width 800 :align center
+[[file:img/welcome.png]]
 
 * ¿Cómo será el curso?
 
@@ -26,6 +27,12 @@ Escribe a ~miguel.escalante@itam.mx~ y por favor que el subject del correo diga 
 - Las tareas estarán basadas en las habilidades que desarrolles en clase ¡Trata de no faltar!
 - Practicar es la única manera de volverse bueno en esto. Lo más probable es que pases de 8 a 12 horas por semana (además del tiempo de la clase) escribiendo y *debugeando* código.
 - Si tienes problemas con la tarea, pregúntame, o busca ayuda de tus compañeros. *NO* esperes a que sea demasiado tarde para tomar tu destino en tus manos.
+
+* Comunicación
+
+** Correo
+Escribe a ~miguel.escalante@itam.mx~ y por favor que el subject del correo diga ~[Estadística Computacional 2021]~.
+** Discord
 
 * Temario
 
@@ -59,19 +66,33 @@ Escribe a ~miguel.escalante@itam.mx~ y por favor que el subject del correo diga 
   - S3
   - RDS
 
+
 * Evaluación
 
 La calificación final está compuesta de la manera siguiente:
 
-| Entregable          | Porcentaje |
-|---------------------+------------|
-| Tareas              |        20% |
-| Proyecto intermedio |        30% |
-| Proyecto Final      |        50% |
+| Entregable               | Porcentaje |
+|--------------------------+------------|
+| Primer Parcial           |        30% |
+| Examen Final             |        30% |
+| Proyecto Final (equipos) |        30% |
+| Presentación             |        10% |
+
+** Primer Parcial
+A la mitad del semestre haremos una evaluación con los temas vistos hasta el momento, todo lo visto o mencionado en clase es sujeto a ser evaluado en este examen. Tendrá un componente teórico y un componente práctico, más o menos al 50%.
+
+** Examen Final
+Al final del semestre tendremos una evaluación global de temas del curso, abarca todo el contenido que hayamos visto hasta ese momento. Habrá componentes teóricos y prácticos alrededor del 50% cada uno.
+
+** Proyecto Final
+Al final del semestre también espero que entreguen un proyecto englobando todos los conceptos que veamos. Será entregar un dashboard de analítica avanzada con interactividad. El equipo puede ser de a lo más 3 personas y será asignado aleatoreamente.
+
+** Presentación
+Una parte fundamental de la ciencia de datos es el presentar resultados a los interesados en el problema, por lo que para ejercitarlo se harán presentaciones de 5 minutos, (si 10% de su calificación en 5 minutos). Los 5 minutos son para establecer un hallazgo que hayan tenido en algún dataset que les interese. Tendremos presentaciones como esta durante el curso y cuando sea momento abriré los lugares para que se puedan organizar.
 
 * Calificación
 
-Se usará la siguiente escala para las tareas
+Para la evaluación del código que lleguen a escribir se contemplará la siguiente escala a manera de referencia.
 
 | Puntos | Descripción                                                                                                      |
 |--------+------------------------------------------------------------------------------------------------------------------|
@@ -98,7 +119,8 @@ El proyecto se evaluará promediando las siguientes categorías. Se usará la es
 
 ** Demostración del proyecto
 
-Al final del curso, tendrás que mostrar tu proyecto en 40 minutos a la clase. Se calificará por mí y por tus compañeros.
+Al final del curso, tendrás que mostrar tu proyecto en 15 minutos a la clase. Se calificará por mí y por tus compañeros.
+
 * Aclaraciones
 
 - El código *NO* es la respuesta.
