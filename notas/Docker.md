@@ -18,7 +18,7 @@ Es una plataforma de virtualización además de un conjunto de comandos para est
 Una **imagen** es una especie de cascarón o plantilla no modificable.
 
 > **Ejemplo**
-> Ejemplos de imágenes son `ubuntu` y la imagen de la clase con la que trabajaremos (`es2021`).
+> Ejemplos de imágenes son `ubuntu` y la imagen de la clase con la que trabajaremos (`es2022`).
 
 Un **contenedor** es creado a partir de una *imagen*. Los contenedores es aquello con lo que vas a interactuar. Pueden ser ejecutados, iniciados, detenidos, movidos, borrados, etc. Cada contenedor es un ambiente aislado. Aunque pueden ser conectados entre sí.
 
@@ -66,13 +66,13 @@ docker ps -a
 - Descargarla
 
 ```
-docker pull skalas/es2021
+docker pull skalas/ec2022
 ```
 
 - Creen un contenedor:
 
 ```
-docker run -p 8888:8888 -it skalas/ec2021
+docker run -p 8888:8888 -it skalas/ec2022
 ```
 - Aquí son el usuario `root`.
 - Corran el comando `sudo su jovyan`
