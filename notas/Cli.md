@@ -76,7 +76,7 @@ manipulación del `file system`.
 - Inicia una sesión en `docker`
 - Deberías de ver algo como esto:
 ```
-root@6ddfd57cc4ec:/#
+jovyan@6ddfd57cc4ec:/#
 ```
 - Teclea `whoami` y luego presiona *enter*. Este comando te dice que
 usuario eres. Observa que el usuario actual es `jovyan`.
