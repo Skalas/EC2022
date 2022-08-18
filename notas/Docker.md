@@ -74,8 +74,6 @@ docker pull skalas/ec2022
 ```
 docker run -p 8888:8888 -it skalas/ec2022
 ```
-- Aquí son el usuario `root`.
-- Corran el comando `sudo su jovyan`
 - Ejecuten el comando `whoami`. Debería de aparecer `jovyan`
 - Si llegaron hasta acá ¡Felicidades! No sufrirán más de lo necesario en este curso.
 - Para salir de `docker` usen `Ctrl-d` o tecleen `exit`.
