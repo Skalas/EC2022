@@ -180,3 +180,5 @@ Primer tarea!!
 * Emacs
 
 Después de tener converso al director de la Maestría, estoy convencido del valor que provee tener una herramienta como Emacs disponible, tanto para temas de escritura científica, como para programación, durante el curso verán que uso esta herramienta. Denle una oportunidad aunque su curva de aprendizaje sea un poco inclinada. :)
+* Usuarios github.
+Por favor [[https://forms.gle/x3dEbuB5Tzqx6MDn6][entren aquí]] y agreguen su información, para tener los usuarios de github y la lista de las CU's.
