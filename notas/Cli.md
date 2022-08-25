@@ -1,6 +1,6 @@
 # La línea de comandos
 
-**NOTA**: Esta *lecture* está basada parcialmente en las notas del curso C4P de California Polytechnic State University, San Luis Obispo, y las notas del Dr. Adolfo de Unánue Tiscareño, con su permiso. 
+**NOTA**: Esta *lecture* está basada parcialmente en las notas del curso C4P de California Polytechnic State University, San Luis Obispo, y las notas del Dr. Adolfo de Unánue Tiscareño, con su permiso.
 
 ## Introducción
 
@@ -50,7 +50,7 @@ Al final las computadoras sólo hacen cuatro cosas:
 ## La línea de comandos
 
 La línea de comandos es lo que estará entre nosotros y la computadora
-casi todo el tiempo en este curso. 
+casi todo el tiempo en este curso.
 
 La **CLI** es otro programa más de la computadora y su función es
 ejecutar otros comandos. El más popular es `bash`, que es un acrónimo
@@ -172,7 +172,7 @@ Y ahora intenta lo siguiente:
 
 ## Pipes y flujos
 
-- `|` (pipe) “Entuba” la salida de un comando al siguiente 
+- `|` (pipe) “Entuba” la salida de un comando al siguiente
 - `>`,`>>`, Redirecciona la salida de los comandos a un sumidero.
 
 ```
@@ -205,7 +205,7 @@ primero es exitoso.
 - En nuestro caso nos interesa la bandera `-l` la cual sirve para contar líneas.
 
 
-```
+```bash
 > wc -l /etc/passwd
 24 /etc/passwd
 ```
@@ -215,14 +215,14 @@ primero es exitoso.
 respectivamente.
 
 
-```
+```bash
 > head /etc/passwd
 > tail -3 /etc/passwd
 ```
 
 - `cat` concatena archivos y/o imprime al `stdout`
 
-```
+```bash
 > echo 'Hola mundo' >> test
 > echo 'Adios mundo cruel' >> test
 > cat test
@@ -251,7 +251,8 @@ Además, en tu `docker` el `zsh` viene recargado con `oh-my-zsh`.
 
 Para cambiar el tema de tu `zsh` edita el archivo `~/.zshrc` y
 cambia la variable
-```
+
+```bash
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
