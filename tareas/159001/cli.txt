@@ -1,0 +1,22 @@
+Problema:
+Se tiene una carpeta con multiples archivos csv. Se necesita juntar todos los archivos en uno sólo y
+se sabe que:
+
+	- los archivos tienen el mismo encabezado
+	- los archivos son de múltiples dimensiones
+	- sólo se necesita que aparezca una vez el encabezado
+	- se debe hacer con algún comando o comandos
+
+
+Solución:
+
+cat $(ls | grep .csv) | head -n 1 && cat $(ls | grep .csv) | grep -v $(cat $(ls | grep .csv) | head -n 1)
+
+
+Explicación:
+
+cat $(ls | grep .csv) | head -n 1
+A) se toman todos los archivos con la extensión requerida y se imprime la primera línea de su contenido (siento esta el encabezado de todos los archivos).
+
+cat $(ls | grep .csv) | grep -v $(cat $(ls | grep .csv) | head -n 1)
+B) se toma el contenido de todos los archivos csv que se encuentren en el directorio y no se imprimen las líneas que sean encabezados basados en la condición anterior.
