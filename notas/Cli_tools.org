@@ -421,3 +421,18 @@ BEGIN { for (i=1; i<=10; i++) print "El cuadrado de ", i, "es",i*i;}
 #+begin_src shell
  awk -f cuadrado.awk
 #+end_src
+
+*** Otro ejemplo
+
+#+begin_src shell :tangle ./fileowner.awk
+#!/usr/bin/awk
+BEGIN { print "File\tOwner" }
+{ print $9, "\t", $3}
+END { }
+#+end_src
+
+#+RESULTS:
+
+#+begin_src shell
+   ls -la | awk -f fileowner.awk
+#+end_src
