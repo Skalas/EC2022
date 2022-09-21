@@ -320,10 +320,10 @@ https://github.com/skalas/EC2022
 ## Ejercicio: Forks
 
 Una vez que tengas configuradas tus credenciales, asegurate de clonar tus repositorios
-usando el conector ssh apropiado, es decir, vayan al [repo de prueba](https://github.com/skalas/repo-prueba) y vayan a la sección de
+usando el conector ssh apropiado, es decir, vayan al [repo de prueba](https://github.com/skalas/repo-prueba)  y generen un Fork, *En su fork* vayan a la sección de
 *Clone* en la esquina superior derecha. Pueden copiar el link directo de la interfaz como se muestra en la imagen.
 Noten que, si hubieran configurado sus credenciales con **https** y no con **ssh**
-deberán copiar el otro link (que normalmente es `https://github.com/<usuario-u-organizacion/<nombre-del-repositorio>.git`)
+deberán copiar el otro link (que normalmente es `git@github.com/<usuario-u-organizacion/<nombre-del-repositorio>.git`)
 
 Es importante que sepan de la otra manera de configurar pues, en muchos casos,
 la conexion por ssh está bloqueada en las empresas y no podrán replicar esa 
@@ -335,7 +335,7 @@ Después, se van a la terminal, buscan el directorio en el que quieren tener
 su repositorio y lo clonan ahí.
 
 ```{bash eval=FALSE}
-git clone https://github.com/<usuario_github>/repo-prueba.git
+git clone git@github.com/<usuario_github>/repo-prueba.git
 ```
 
 Esto creará una carpeta `repo-prueba` en su directorio en el que lo hayan
