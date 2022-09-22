@@ -4,35 +4,22 @@
 
 ** Introducción
 
-El ~shell~ de Unix (en su caso particular es un ~shell~ de
-~GNU/Linux~), es más viejo que todos nosotros. Y el hecho de que siga
-activo, y en uso, se debe a que es una de las invenciones humanas más
-exitosas para usar la computadora de manera eficiente.
+El ~shell~ de Unix (en su caso particular es un ~shell~ de ~GNU/Linux~), es más viejo que todos nosotros. Y el hecho de que siga activo, y en uso, se debe a que es una de las invenciones humanas más exitosas para usar la computadora de manera eficiente.
 
 De una manera muy rápida el ~shell~ puede hacer lo siguiente:
 
-- Un intérprete interactivo: lee comandos, encuentra los programas
-  correspondientes, los ejecuta y despliega la salida.
+- Un intérprete interactivo: lee comandos, encuentra los programas correspondientes, los ejecuta y despliega la salida.
   - Esto se conoce como *REPL*: /Read, Evaluate, Print, Loop./
-- La salida puede ser redireccionada a otro lugar además e la
-  pantalla. (Usando ~>~ y ~<~).
-- Una cosa muy poderosa (y en la que está basada --como casi todo lo
-  actual--) es combinar comandos que son muy básicos (sólo hacen una
-  sola cosa) con otros para hacer cosas más complicadas (esto es con
-  un /pipe/ ~|~).
+- La salida puede ser redireccionada a otro lugar además de la pantalla. (Usando ~>~ y ~<~).
+- Una cosa muy poderosa (y en la que está basada --como casi todo lo actual--) es combinar comandos que son muy básicos (sólo hacen una sola cosa) con otros para hacer cosas más complicadas (esto es con  un /pipe/ ~|~).
 - Mantiene un histórico que permite rejecutar cosas del pasado.
+
 - La información es guardada jerárquicamente en carpetas o directorios.
-- Existen comandos para hacer búsquedas dentro de archivos (~grep~) o
-  para buscar archivos (~find~) que combinados pueden ser muy
-  poderosos.
-  - Uno puede hacer *data analysis* solamente con estos comandos, así
-    de poderosos son.
-- Las ejecuciones pueden ser pausadas, ejecutadas en el *fondo* o en
-  máquinas remotas.
+  - Existen comandos para hacer búsquedas dentro de archivos (~grep~) o para buscar archivos (~find~) que combinados pueden ser muy poderosos.
+  - Uno puede hacer /data analysis/ solamente con estos comandos, así de poderosos son.
+- Las ejecuciones pueden ser pausadas, ejecutadas en el *fondo* o en  máquinas remotas.
 - Además es posible definir variables para usarse por otros programas.
-- El ~shell~ cuenta con todo un lenguaje de programación, lo que
-  permite ejecutar cosas en **bucles**, **condicionales**, y hasta
-  cosas en paralelo.
+- El ~shell~ cuenta con todo un lenguaje de programación, lo que  permite ejecutar cosas en *bucles*,*condicionales*, y hasta cosas en paralelo.
 
 ** La computadora desde cerca
 
@@ -42,34 +29,20 @@ Al final las computadoras sólo hacen cuatro cosas:
 - Almacenan datos
 - Se comunican entre sí para hacer las cosas recién mencionadas.
 - Interactúan con nosotros.
-  - La interacción puede ser gráfica (como están acostumbrados)
-    conocida también como **GUI** (*Graphical User Interface*) vía el
-    ratón u otro periférico, o desde la línea de comandos, llamada
-    como **CLI** (*Command Line Interface*).
+- La interacción puede ser gráfica (como están acostumbrados) conocida también como *GUI* (/Graphical User Interface/) vía el ratón u otro periférico, o desde la línea de comandos, llamada  como *CLI* (/Command Line Interface/).
 
 ** La línea de comandos
 
-La línea de comandos es lo que estará entre nosotros y la computadora
-casi todo el tiempo en este curso.
+La línea de comandos es lo que estará entre nosotros y la computadora casi todo el tiempo en este curso.
 
-La **CLI** es otro programa más de la computadora y su función es
-ejecutar otros comandos. El más popular es ~bash~, que es un acrónimo
-de *Bourne again shell*. Aunque en esta clase también usaremos ~zsh~.
+La *CLI* es otro prograqma más de la computadora y su función es ejecutar otros comandos. El más popular es ~bash~, que es un acrónimo de /Bourne again shell/. Aunque en esta clase también usaremos ~zsh~.
 
 
 ** Archivos y directorios
 
-La computadora guarda la información de una manera ordenada. El
-sistema encargado de esto es el ~file system~. Básicamente es un árbol
-de información (aunque hay varios tipos de ~file systems~ que pueden
-utilizar modificaciones a esta estructura de datos, lo que voy a decir
-aplica desde su punto de vista como usuarios) que guarda los datos en
-una abstracción que llamamos *archivos* y ordena los archivos en
-*carpetas* o *directorios*, los cuales a su vez pueden contener otros
-*directorios*.
+La computadora guarda la información de una manera ordenada. El sistema encargado de esto es el ~file system~. Básicamente es un árbol de información (aunque hay varios tipos de ~file systems~ que pueden utilizar modificaciones a esta estructura de datos, lo que voy a decir aplica desde su punto de vista como usuarios) que guarda los datos en una abstracción que llamamos *archivos* y ordena los archivos en *carpetas* o *directorios*, los cuales a su vez pueden contener otros *directorios*.
 
-Muchos de los comandos del **CLI** o ~shell~ tienen que ver con la
-manipulación del ~file system~.
+Muchos de los comandos del *CLI* o ~shell~ tienen que ver con la manipulación del ~file system~.
 
 *** Ejercicio:
 
@@ -149,18 +122,18 @@ clase).
 
 
 ** Navegar
-Moverse rápidamente en la **CLI** es de vital importancia. Teclea en tu **CLI**
+Moverse rápidamente en la *CLI* es de vital importancia. Teclea en tu *CLI*
 
-~~~
+#+begin_src sh
 Anita lava la tina
 #+end_src
 
 Y ahora intenta lo siguiente:
 
-- ~Ctrl + a~ Inicio de la línea
-- ~Ctrl + e~ Fin de la línea
+- ~Ctrl + a~ Inicio de la línea.
+- ~Ctrl + e~ Fin de la línea.
 - ~Ctrl + r~ Buscar hacia atrás
-  - Elimina el *flechita arriba*
+- Elimina el *flechita arriba*
 - ~Ctrl + b~ / ~Alt + b~
 - ~Ctrl + f~ / ~Alt + f~
 - ~Ctrl + k~ - Elimina el resto de la línea (en realidad corta y pone en el búfer circular)
@@ -172,53 +145,53 @@ Y ahora intenta lo siguiente:
 
 ** Pipes y flujos
 
-- ~|~ (pipe) “Entuba” la salida de un comando al siguiente
-- ~>~,~>>~, Redirecciona la salida de los comandos a un sumidero.
+- ~|~ (pipe) “Entuba” la salida de un comando al siguiente.
 
-~~~
-ls >> prueba.dat
-#+end_src
+- ~>~, ~>>~, Redirecciona la salida de los comandos a un sumidero.
 
+  #+begin_src sh
+    ls >> prueba.dat
+  #+end_src
 
-- ~<~ Redirecciona desde el archivo
-~~~
-sort < prueba.dat # A la línea de comandos acomoda con sort,
-sort < prueba.dat > prueba_sort.dat # Guardar el sort a un archivo.
-#+end_src
+  #+RESULTS:
 
-- ~&&~ es un AND, sólo ejecuta el comando que sigue a ~&&~ si el
-primero es exitoso.
+- ~<~ Redirecciona desde el archivo.
 
-~~~
-> ls && echo "Hola"
-> lss && echo "Hola"
-#+end_src
+    #+begin_src sh
+    sort < prueba.dat # A la línea de comandos acomoda con sort,
+    sort < prueba.dat > prueba_sort.dat # Guardar el sort a un archivo.
+  #+end_src
 
+- ~&&~ es un AND, sólo ejecuta el comando que sigue a ~&&~ si el primero es exitoso.
+
+  #+begin_src shell
+    ls && echo "Hola"
+    lss && echo "Hola"
+  #+end_src
 
 ** Otros comandos
 
 
 
-- ~wc~ significa *word count*
+- ~wc~ significa /word count/.
   - Cuenta palabras,renglones, bytes, etc.
+  - En nuestro caso nos interesa la bandera ~-l~ la cual sirve para contar líneas.
 
-- En nuestro caso nos interesa la bandera ~-l~ la cual sirve para contar líneas.
 
 
-#+begin_src bash
+#+begin_src sh
   > wc -l /etc/passwd
   24 /etc/passwd
-  ~~~
-
-  - ~head~ y ~tail~ sirven para explorar visualmente las primeras diez
-  (default) o las últimas diez (default) renglones del archivo,
-  respectivamente.
-
-
-  ,#+begin_src bash
-  > head /etc/passwd
-  > tail -3 /etc/passwd
 #+end_src
+
+  - ~head~ y ~tail~ sirven para explorar visualmente las primeras diez   (default) o las últimas diez (default) renglones del archivo,  respectivamente.
+     #+begin_src sh
+       head /etc/passwd
+     #+end_src
+
+     #+begin_src shell
+       tail -3 /etc/passwd
+     #+end_src
 
 - ~cat~ concatena archivos y/o imprime al ~stdout~
 

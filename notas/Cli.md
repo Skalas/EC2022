@@ -71,7 +71,7 @@ una abstracción que llamamos *archivos* y ordena los archivos en
 Muchos de los comandos del **CLI** o `shell` tienen que ver con la
 manipulación del `file system`.
 
-### Ejercicio:
+*** Ejercicio:
 
 - Inicia una sesión en `docker`
 - Deberías de ver algo como esto:
