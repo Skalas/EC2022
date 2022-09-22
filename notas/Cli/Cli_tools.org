@@ -30,15 +30,16 @@ cat test.log | cut -b 1-2> test-out.log
 #+RESULTS:
 | ol | lel | li |
 
+
 ** Delimiter, Field.
 =-d=  nos dice qué caracter usaremos para hacer los cortes, y el parámetro =-f= nos dice con qué columnas nos quedaremos.
 
 #+begin_src shell
-echo "lol,lel,lil,lul,lal" | cut -d ',' -f5
+echo "lol,lel,lil,lul,lal" | cut -d ',' -f3
 #+end_src
 
 #+RESULTS:
-: lal
+: lil
 
 #+begin_src shell
 echo "lol,lel,lil,lul,lal" | cut -d ','  -f 4,5,1,2
@@ -75,17 +76,9 @@ echo "lol,lel,lil,lul,lal" | cut --complement  -d ',' -f 1 --output-delimiter="@
 : lel@lil@lul@lal
 
 #+begin_src shell
-  cat test.log | cut -d' ' -f 3 | cut -d ':' -f 1| sort | uniq > ejercicio.log
+  cat test.log | cut -d':' -f 3 | cut -d ';' -f 2| sort | uniq > ejercicio.log
 #+end_src
 
-#+RESULTS:
-
-** Bytes
-#+begin_src shell
-cat test.log | cut -b 1-2 > test-out.log
-#+end_src
-
-#+RESULTS:
 
 * sed
 Stream Editor, es un editor de texto /on-the-go/, el uso más común es reemplazar textos, pero puede hacer mucho más.
