@@ -13,7 +13,6 @@
 * cut
 
 Es un programa que toma un caracter que mandemos en el parámetro =-d= y lo imprime a STDOUT.
-
 ** Bytes
 #+begin_src shell
 cat test.log | cut -b 1-2> test-out.log
@@ -29,7 +28,6 @@ cat test.log | cut -b 1-2> test-out.log
 
 #+RESULTS:
 | ol | lel | li |
-
 
 ** Delimiter, Field.
 =-d=  nos dice qué caracter usaremos para hacer los cortes, y el parámetro =-f= nos dice con qué columnas nos quedaremos.
@@ -55,7 +53,6 @@ echo "lol,lel,lil,lul,lal" | cut -d ','  -f 1-4
 #+RESULTS:
 | lol | lel | lil | lul |
 
-
 ** Complement
 
 Nos da el complemento de las columnas que mandemos :
@@ -65,7 +62,6 @@ echo "lol,lel,lil,lul,lal" | cut --complement  -d ',' -f 1,2,3
 
 #+RESULTS:
 | lul | lal |
-
 
 ** Output Delimiter:
 #+begin_src shell
@@ -79,20 +75,20 @@ echo "lol,lel,lil,lul,lal" | cut --complement  -d ',' -f 1 --output-delimiter="@
   cat test.log | cut -d':' -f 3 | cut -d ';' -f 2| sort | uniq > ejercicio.log
 #+end_src
 
-
 * sed
 Stream Editor, es un editor de texto /on-the-go/, el uso más común es reemplazar textos, pero puede hacer mucho más.
-
 ** Sustitución.
 
 #+begin_src shell
-  cat kernel.log | sed 's/Bluetooth/@HOLA@/g' > result.log
+  cat kernel.log | sed 's/evdi/@HOLA@/g' > result.log
 #+end_src
 
 #+RESULTS:
 
 ** Reemplazar la n-ésima ocurrencia en un archivo.
+
 Sed trabaja línea a línea por lo que para poder reemplazar la n-ésima ocurrencia de un texto, lo hace a nivel línea.
+
 #+begin_src shell
   cat kernel.log | sed 's/:/@HOLA@/1' > result.log
 #+end_src
@@ -100,12 +96,12 @@ Sed trabaja línea a línea por lo que para poder reemplazar la n-ésima ocurren
 #+RESULTS:
 
 concatenando comandos:
+
 #+begin_src shell
   cat kernel.log | sed 's/:/@HOLA@/2g' > result.log
 #+end_src
 
 #+RESULTS:
-
 
 ** Elegit una línea particular a sustituír.
 
@@ -123,12 +119,17 @@ concatenando comandos:
 #+RESULTS:
 
 #+begin_src shell
-  sed '3 s/:/@HOLA@/3g' < kernel.log > result.log
+  sed 's/pop/@hola@/g' kernel.log > result.log
+#+end_src
+
+#+begin_src shell
+  sed '2,$ s/:/@HOLA@/3g' < kernel.log > result.log
 #+end_src
 
 #+RESULTS:
 
 ** Doble o nada :P
+
 la bandera =p= al final permite que se reimprima la línea en la cual se sustituyó el texto encontrado, ojo que si encuentra varias sustituciones sólo la repite una vez.
 
 #+begin_src shell
@@ -145,7 +146,7 @@ la bandera =p= al final permite que se reimprima la línea en la cual se sustitu
 A menos que sólo quieras generar la impresión de sólo las que tuvieron sustitución.
 #+begin_src shell
   echo `wc -l kernel.log`
-  sed -n '3 s/:/@HOLA@/p' < kernel.log > result.log
+  sed -n '3 s/:/@HOLA@/pg' < kernel.log > result.log
   echo `wc -l result.log`
 #+end_src
 
@@ -157,31 +158,31 @@ A menos que sólo quieras generar la impresión de sólo las que tuvieron sustit
 #+begin_src shell
   echo `wc -l kernel.log`
   sed -n '10,$ s/:/@HOLA@/p' < kernel.log > result.log
-  echo `wc -l result-3.log`
+  echo `wc -l result.log`
 #+end_src
 
 #+RESULTS:
-: 6022 kernel.log
-
+| 6022 | kernel.log |
+| 6013 | result.log |
 
 **  Borrado de líneas!
 *** Podemos borrar una línea del archivo.
 #+begin_src shell
   echo `wc -l kernel.log`
-  sed  '1d' < kernel.log > result-d.log
-  echo `wc -l result-d.log`
+  sed  '1d' < kernel.log > result.log
+  echo `wc -l result.log`
 #+end_src
 
 #+RESULTS:
-| 6022 | kernel.log   |
-| 6021 | result-d.log |
+| 6022 | kernel.log |
+| 6021 | result.log |
 
 
 *** O la última:
 #+begin_src shell
   echo `wc -l kernel.log`
-  sed  '$d' < kernel.log > result-d.log
-  echo `wc -l result-d.log`
+  sed  '$d' < kernel.log > result.log
+  echo `wc -l result.log`
 #+end_src
 
 #+RESULTS:
@@ -213,14 +214,18 @@ A menos que sólo quieras generar la impresión de sólo las que tuvieron sustit
 *** O borramos dado un patrón.
 #+begin_src shell
   echo `wc -l kernel.log`
-  sed  '/Bluetooth/d' < kernel.log > result-d.log
-  echo `wc -l result-d.log`
+  sed  '/evdi/d' < kernel.log > result.log
+  echo `wc -l result.log`
 #+end_src
 
 #+RESULTS:
-| 6022 | kernel.log   |
-| 5838 | result-d.log |
+| 6022 | kernel.log |
+| 5274 | result.log |
 
+*** Borrado de palabras
+#+begin_src shell
+  sed  's/evdi//g' < kernel.log > result.log
+#+end_src
 * grep / regex
 ** ¿Qué es una expresión regular?
 Son una serie de caracteres que especifican patrones. Se usan para hacer búsquedas en textos para extraer diferentes características de los mismos.
@@ -240,19 +245,21 @@ Los caracteres ancla, son caracteres que nos indican por ejemplo el inicio o fin
 + =^= es el caracter lara el inicio de línea.
 #+begin_src shell
   wc -l kernel.log
-  grep "Sep 28" kernel.log | wc -l
-  grep "^Wed" kernel.log | wc -l
-  grep "^Thu" kernel.log | wc -l
-  grep "0$" kernel.log | wc -l
+  grep "Sep 15" kernel.log | wc -l
+  grep "^Sep 15 14:55" kernel.log | wc -l
+  grep "^Sep 15 14:56" kernel.log | wc -l
+  grep "(Xorg)$" kernel.log | wc -l
 #+end_src
-
 
 ** "."
 El "." hace match con cualquier caracter.
 Nos filtra todos los renglones que tienen sólo un caracter.
 #+begin_src shell
-grep "^.$" kernel.log | wc -l
+grep "^.*$" kernel.log | wc -l
 #+end_src
+
+#+RESULTS:
+: 6022
 
 ** Rangos de caracteres.
 Puedes hacer filtros con diferentes patrones al encerrarlos en =[]=.
@@ -295,7 +302,6 @@ Líneas con un sólo caracter excepto este set:
   grep "^[^A-Z_]$" kernel.log | wc -l
   grep "^[^A-Z0-9xs]$" kernel.log | wc -l
 #+end_src
-
 
 ** Repetición:
 podemos pedir que un cierto caracter (o grupo de caracteres se repita cero o más veces).
@@ -686,14 +692,11 @@ ps | awk '{print}'
 | ?   |
 | ?   |
 
-
 *** Delimitadores
 
 #+begin_src shell
   cat /etc/passwd | awk -F ":" '{print $5}'
 #+end_src
-
-
 
 *** Print enhanced.
 
@@ -712,7 +715,6 @@ ps -a | awk '{print $1" "$2" "$3}'
 #+begin_src shell
 awk 'BEGIN{FS="/"; OFS="----"} {print $2, $6, $7}' /etc/passwd
 #+end_src
-
 
 *** Busqueda
 #+begin_src shell
