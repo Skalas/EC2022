@@ -40,3 +40,4 @@ vignettes/*.pdf
 *.html
 *_files/
 *.awk
+*.RData

@@ -91,6 +91,9 @@ Es posible también iterar directamente sobre vectores o partes de vectores.
 
 ```{r}
 x <- c("Andrea", "Liz", "Edwin", "Miguel")
+for (i in x){
+print(i)
+}
 for ( i in 1:length(x) ) {
   print(x[i])
 }

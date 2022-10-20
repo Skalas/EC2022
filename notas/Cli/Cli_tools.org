@@ -13,7 +13,6 @@
 * cut
 
 Es un programa que toma un caracter que mandemos en el parámetro =-d= y lo imprime a STDOUT.
-
 ** Bytes
 #+begin_src shell
 cat test.log | cut -b 1-2> test-out.log
@@ -29,7 +28,6 @@ cat test.log | cut -b 1-2> test-out.log
 
 #+RESULTS:
 | ol | lel | li |
-
 
 ** Delimiter, Field.
 =-d=  nos dice qué caracter usaremos para hacer los cortes, y el parámetro =-f= nos dice con qué columnas nos quedaremos.
@@ -55,7 +53,6 @@ echo "lol,lel,lil,lul,lal" | cut -d ','  -f 1-4
 #+RESULTS:
 | lol | lel | lil | lul |
 
-
 ** Complement
 
 Nos da el complemento de las columnas que mandemos :
@@ -65,7 +62,6 @@ echo "lol,lel,lil,lul,lal" | cut --complement  -d ',' -f 1,2,3
 
 #+RESULTS:
 | lul | lal |
-
 
 ** Output Delimiter:
 #+begin_src shell
@@ -79,20 +75,20 @@ echo "lol,lel,lil,lul,lal" | cut --complement  -d ',' -f 1 --output-delimiter="@
   cat test.log | cut -d':' -f 3 | cut -d ';' -f 2| sort | uniq > ejercicio.log
 #+end_src
 
-
 * sed
 Stream Editor, es un editor de texto /on-the-go/, el uso más común es reemplazar textos, pero puede hacer mucho más.
-
 ** Sustitución.
 
 #+begin_src shell
-  cat kernel.log | sed 's/Bluetooth/@HOLA@/g' > result.log
+  cat kernel.log | sed 's/evdi/@HOLA@/g' > result.log
 #+end_src
 
 #+RESULTS:
 
 ** Reemplazar la n-ésima ocurrencia en un archivo.
+
 Sed trabaja línea a línea por lo que para poder reemplazar la n-ésima ocurrencia de un texto, lo hace a nivel línea.
+
 #+begin_src shell
   cat kernel.log | sed 's/:/@HOLA@/1' > result.log
 #+end_src
@@ -100,12 +96,12 @@ Sed trabaja línea a línea por lo que para poder reemplazar la n-ésima ocurren
 #+RESULTS:
 
 concatenando comandos:
+
 #+begin_src shell
   cat kernel.log | sed 's/:/@HOLA@/2g' > result.log
 #+end_src
 
 #+RESULTS:
-
 
 ** Elegit una línea particular a sustituír.
 
@@ -123,12 +119,17 @@ concatenando comandos:
 #+RESULTS:
 
 #+begin_src shell
-  sed '3 s/:/@HOLA@/3g' < kernel.log > result.log
+  sed 's/pop/@hola@/g' kernel.log > result.log
+#+end_src
+
+#+begin_src shell
+  sed '2,$ s/:/@HOLA@/3g' < kernel.log > result.log
 #+end_src
 
 #+RESULTS:
 
 ** Doble o nada :P
+
 la bandera =p= al final permite que se reimprima la línea en la cual se sustituyó el texto encontrado, ojo que si encuentra varias sustituciones sólo la repite una vez.
 
 #+begin_src shell
@@ -145,7 +146,7 @@ la bandera =p= al final permite que se reimprima la línea en la cual se sustitu
 A menos que sólo quieras generar la impresión de sólo las que tuvieron sustitución.
 #+begin_src shell
   echo `wc -l kernel.log`
-  sed -n '3 s/:/@HOLA@/p' < kernel.log > result.log
+  sed -n '3 s/:/@HOLA@/pg' < kernel.log > result.log
   echo `wc -l result.log`
 #+end_src
 
@@ -157,31 +158,31 @@ A menos que sólo quieras generar la impresión de sólo las que tuvieron sustit
 #+begin_src shell
   echo `wc -l kernel.log`
   sed -n '10,$ s/:/@HOLA@/p' < kernel.log > result.log
-  echo `wc -l result-3.log`
+  echo `wc -l result.log`
 #+end_src
 
 #+RESULTS:
-: 6022 kernel.log
-
+| 6022 | kernel.log |
+| 6013 | result.log |
 
 **  Borrado de líneas!
 *** Podemos borrar una línea del archivo.
 #+begin_src shell
   echo `wc -l kernel.log`
-  sed  '1d' < kernel.log > result-d.log
-  echo `wc -l result-d.log`
+  sed  '1d' < kernel.log > result.log
+  echo `wc -l result.log`
 #+end_src
 
 #+RESULTS:
-| 6022 | kernel.log   |
-| 6021 | result-d.log |
+| 6022 | kernel.log |
+| 6021 | result.log |
 
 
 *** O la última:
 #+begin_src shell
   echo `wc -l kernel.log`
-  sed  '$d' < kernel.log > result-d.log
-  echo `wc -l result-d.log`
+  sed  '$d' < kernel.log > result.log
+  echo `wc -l result.log`
 #+end_src
 
 #+RESULTS:
@@ -213,14 +214,18 @@ A menos que sólo quieras generar la impresión de sólo las que tuvieron sustit
 *** O borramos dado un patrón.
 #+begin_src shell
   echo `wc -l kernel.log`
-  sed  '/Bluetooth/d' < kernel.log > result-d.log
-  echo `wc -l result-d.log`
+  sed  '/evdi/d' < kernel.log > result.log
+  echo `wc -l result.log`
 #+end_src
 
 #+RESULTS:
-| 6022 | kernel.log   |
-| 5838 | result-d.log |
+| 6022 | kernel.log |
+| 5274 | result.log |
 
+*** Borrado de palabras
+#+begin_src shell
+  sed  's/evdi//g' < kernel.log > result.log
+#+end_src
 * grep / regex
 ** ¿Qué es una expresión regular?
 Son una serie de caracteres que especifican patrones. Se usan para hacer búsquedas en textos para extraer diferentes características de los mismos.
@@ -237,22 +242,24 @@ OJO: veremos las bases del lenguaje, ya que hay demasiado material para todo lo 
 ** Caracteres Ancla
 Los caracteres ancla, son caracteres que nos indican por ejemplo el inicio o fin de una línea:
 + =$= es el caracter para el fin de línea.
-+ =^= es el caracter lara el inicio de línea.
++ =^= es el caracter para el inicio de línea.
 #+begin_src shell
   wc -l kernel.log
-  grep "Sep 28" kernel.log | wc -l
-  grep "^Wed" kernel.log | wc -l
-  grep "^Thu" kernel.log | wc -l
-  grep "0$" kernel.log | wc -l
+  grep "Sep 15" kernel.log |head -5
+  grep "^Sep 15 14:55" kernel.log | wc -l
+  grep "^Sep 15 14:56" kernel.log | wc -l
+  grep "(Xorg)$" kernel.log | wc -l
 #+end_src
-
 
 ** "."
 El "." hace match con cualquier caracter.
 Nos filtra todos los renglones que tienen sólo un caracter.
 #+begin_src shell
-grep "^.$" kernel.log | wc -l
+grep "^.*$" kernel.log | wc -l
 #+end_src
+
+#+RESULTS:
+: 6022
 
 ** Rangos de caracteres.
 Puedes hacer filtros con diferentes patrones al encerrarlos en =[]=.
@@ -260,6 +267,11 @@ Puedes hacer filtros con diferentes patrones al encerrarlos en =[]=.
 
 #+begin_src shell
 grep "^[0-9]$" kernel.log | wc -l
+#+end_src
+
+Búsqueda de dos números seguidos y sólo esos dos en la línea
+#+begin_src shell
+grep "^[0-9]*$" kernel.log | wc -l
 #+end_src
 
 
@@ -282,10 +294,10 @@ grep "^[a-z]$" kernel.log | wc -l
 Ojo que hay diferencias con las letras mayúsculas:
 
 #+begin_src shell
-  grep "^[A-Z]$" kernel.log | wc -l
+  grep "^[A-Z ]$" kernel.log | wc -l
   grep "^[A-Za-z]$" kernel.log | wc -l
   grep "^[A-Za-z0-9]$" kernel.log | wc -l
-  grep "^[A-Za-z0-9_\.]$" kernel.log | wc -l
+  grep "^[A-Za-z0-9_\.]*$" kernel.log | wc -l
 #+end_src
 
 ** Excepciones
@@ -295,7 +307,6 @@ Líneas con un sólo caracter excepto este set:
   grep "^[^A-Z_]$" kernel.log | wc -l
   grep "^[^A-Z0-9xs]$" kernel.log | wc -l
 #+end_src
-
 
 ** Repetición:
 podemos pedir que un cierto caracter (o grupo de caracteres se repita cero o más veces).
@@ -311,16 +322,16 @@ es importante que en este caso el =*= no es lo mismo que en los wildcards de cua
 ** Número de ocurrencias.
 delimitar el número de ocurrencias.
 #+begin_src shell
-  grep "^[A-Z]\{2,2\}$" kernel.log | wc -l
+  grep "^[A-Z0-9]\{2,\}$" kernel.log | wc -l
   grep "^[A-Z].*" kernel.log | wc -l
 #+end_src
 
 ** Matcheo de palabras.
 
 #+begin_src shell
-  grep "\<[Tt]ue\>" kernel.log | wc -l
-  grep "Thu\{0,1\}\<[Tt]ue\>\{0,1\}" kernel.log | wc -l
-  grep "\<[TW][ehu][deu]\>" kernel.log | wc -l
+  grep "\<[Ff]amily\>" kernel.log
+  grep "Thu\{,1\}" kernel.log | wc -l
+  grep "\<[TW][ehu][deu]\>" kernel.log |wc -l
 
 #+end_src
 
@@ -346,7 +357,7 @@ la estructura base del programa en awk es :
 
 #+begin_src shell
   awk 'BEGIN { print "START" }
-             { print         }
+             { print   ""    }
        END   { print "STOP"  }'
 #+end_src
 
@@ -357,349 +368,22 @@ la estructura base del programa en awk es :
 ps | awk '{print}'
 #+end_src
 
-#+RESULTS:
-|   PID | TTY |     TIME | CMD             |           |
-|  3649 | ?   | 00:00:00 | systemd         |           |
-|  3650 | ?   | 00:00:00 | (sd-pam)        |           |
-|  3660 | ?   | 00:00:57 | pipewire        |           |
-|  3663 | ?   | 00:00:02 | wireplumber     |           |
-|  3665 | ?   | 00:00:00 | pipewire        |           |
-|  3667 | ?   | 00:01:33 | pipewire-pulse  |           |
-|  3670 | ?   | 00:00:00 | gnome-keyring-d |           |
-|  3671 | ?   | 00:00:00 | dbus-broker-lau |           |
-|  3675 | ?   | 00:00:01 | dbus-broker     |           |
-|  3678 | ?   | 00:00:00 | gvfsd           |           |
-|  3683 | ?   | 00:00:00 | gvfsd-fuse      |           |
-|  3704 | ?   | 00:00:01 | tracker-miner-f |           |
-|  3712 | ?   | 00:00:00 | gvfs-udisks2-vo |           |
-|  3717 | ?   | 00:00:00 | gvfs-mtp-volume |           |
-|  3721 | ?   | 00:00:00 | gvfs-gphoto2-vo |           |
-|  3726 | ?   | 00:00:00 | gvfs-goa-volume |           |
-|  3729 | ?   | 00:00:06 | goa-daemon      |           |
-|  3735 | ?   | 00:00:00 | goa-identity-se |           |
-|  3740 | ?   | 00:00:00 | gvfs-afc-volume |           |
-|  3757 | ?   | 00:00:00 | gnome-keyring-d |           |
-|  3923 | ?   | 00:00:00 | at-spi-bus-laun |           |
-|  3928 | ?   | 00:00:00 | dbus-broker-lau |           |
-|  3929 | ?   | 00:00:00 | dbus-broker     |           |
-|  3939 | ?   | 00:00:00 | gnome-session-c |           |
-|  3950 | ?   | 00:00:00 | gnome-session-b |           |
-|  3969 | ?   | 00:06:26 | gnome-shell     |           |
-|  3988 | ?   | 00:00:00 | xdg-permission- |           |
-|  3992 | ?   | 00:00:00 | gnome-shell-cal |           |
-|  4000 | ?   | 00:00:00 | evolution-sourc |           |
-|  4006 | ?   | 00:00:00 | dconf-service   |           |
-|  4009 | ?   | 00:00:00 | gvfsd-metadata  |           |
-|  4023 | ?   | 00:00:04 | evolution-calen |           |
-|  4053 | ?   | 00:00:00 | evolution-addre |           |
-|  4056 | ?   | 00:00:00 | gvfsd-trash     |           |
-|  4079 | ?   | 00:00:00 | xdg-desktop-por |           |
-|  4083 | ?   | 00:00:00 | xdg-document-po |           |
-|  4092 | ?   | 00:00:01 | xdg-desktop-por |           |
-|  4107 | ?   | 00:00:01 | at-spi2-registr |           |
-|  4108 | ?   | 00:00:00 | gjs             |           |
-|  4130 | ?   | 00:00:00 | sh              |           |
-|  4131 | ?   | 00:00:00 | gsd-a11y-settin |           |
-|  4133 | ?   | 00:00:14 | ibus-daemon     |           |
-|  4134 | ?   | 00:00:00 | gsd-color       |           |
-|  4136 | ?   | 00:00:00 | gsd-datetime    |           |
-|  4138 | ?   | 00:00:00 | gsd-housekeepin |           |
-|  4139 | ?   | 00:00:00 | hidpi-daemon    |           |
-|  4143 | ?   | 00:00:00 | gsd-keyboard    |           |
-|  4145 | ?   | 00:00:00 | gsd-media-keys  |           |
-|  4149 | ?   | 00:00:00 | gsd-power       |           |
-|  4150 | ?   | 00:00:00 | gsd-print-notif |           |
-|  4152 | ?   | 00:00:00 | gsd-rfkill      |           |
-|  4156 | ?   | 00:00:00 | gsd-screensaver |           |
-|  4158 | ?   | 00:00:01 | gsd-sharing     |           |
-|  4159 | ?   | 00:00:00 | gsd-smartcard   |           |
-|  4161 | ?   | 00:00:00 | gsd-sound       |           |
-|  4162 | ?   | 00:00:00 | gsd-wacom       |           |
-|  4165 | ?   | 00:00:00 | gsd-xsettings   |           |
-|  4181 | ?   | 00:00:00 | evolution-alarm |           |
-|  4186 | ?   | 00:00:00 | hidpi-notificat |           |
-|  4189 | ?   | 00:00:42 | io.elementary.a |           |
-|  4200 | ?   | 00:00:00 | touchegg        |           |
-|  4212 | ?   | 00:00:00 | ibus-memconf    |           |
-|  4229 | ?   | 00:00:04 | ibus-extension- |           |
-|  4234 | ?   | 00:00:00 | gsd-disk-utilit |           |
-|  4238 | ?   | 00:00:02 | ibus-x11        |           |
-|  4241 | ?   | 00:00:02 | ibus-portal     |           |
-|  4287 | ?   | 00:00:00 | gsd-printer     |           |
-|  4322 | ?   | 00:00:31 | dropbox         |           |
-|  4396 | ?   | 00:00:03 | ibus-engine-sim |           |
-|  4401 | ?   | 00:00:00 | gjs             |           |
-|  4404 | ?   | 00:00:00 | xdg-desktop-por |           |
-|  4510 | ?   | 00:00:07 | gjs             |           |
-|  4687 | ?   | 00:00:00 | pop-system-upda |           |
-| 21677 | ?   | 00:00:01 | gnome-terminal- |           |
-| 21764 | ?   | 00:00:00 | ssh-agent       |           |
-| 23660 | ?   | 00:06:15 | opera           |           |
-| 23665 | ?   | 00:00:00 | opera           |           |
-| 23666 | ?   | 00:00:00 | opera           |           |
-| 23668 | ?   | 00:00:00 | opera           |           |
-| 23690 | ?   | 00:53:43 | opera           |           |
-| 23696 | ?   | 00:02:14 | opera           |           |
-| 23706 | ?   | 00:00:01 | opera           |           |
-| 23714 | ?   | 00:00:01 | opera           |           |
-| 23787 | ?   | 00:00:01 | opera           |           |
-| 23801 | ?   | 00:00:03 | opera           |           |
-| 23822 | ?   | 00:00:05 | opera           |           |
-| 23824 | ?   | 00:04:00 | opera           |           |
-| 23855 | ?   | 00:00:17 | opera           |           |
-| 23863 | ?   | 00:00:27 | opera           |           |
-| 23923 | ?   | 00:01:26 | opera           |           |
-| 23955 | ?   | 00:00:20 | opera           |           |
-| 23969 | ?   | 00:00:04 | opera           |           |
-| 24000 | ?   | 00:00:04 | opera           |           |
-| 24098 | ?   | 00:00:04 | opera           |           |
-| 24785 | ?   | 00:03:51 | opera           |           |
-| 25163 | ?   | 00:00:00 | bwrap           |           |
-| 25171 | ?   | 00:00:00 | flatpak-session |           |
-| 25186 | ?   | 00:00:00 | p11-kit-server  |           |
-| 25208 | ?   | 00:00:00 | bwrap           |           |
-| 25211 | ?   | 00:00:00 | xdg-dbus-proxy  |           |
-| 25230 | ?   | 00:00:00 | bwrap           |           |
-| 25270 | ?   | 00:00:27 | slack           |           |
-| 25284 | ?   | 00:00:00 | cat             |           |
-| 25285 | ?   | 00:00:00 | cat             |           |
-| 25288 | ?   | 00:00:00 | flatpak-portal  |           |
-| 25294 | ?   | 00:00:00 | slack           |           |
-| 25296 | ?   | 00:00:00 | zypak-sandbox   | <defunct> |
-| 25298 | ?   | 00:00:00 | bwrap           |           |
-| 25307 | ?   | 00:00:00 | bwrap           |           |
-| 25308 | ?   | 00:00:00 | slack           |           |
-| 25327 | ?   | 00:00:00 | chrome_crashpad |           |
-| 25341 | ?   | 00:01:21 | slack           |           |
-| 25349 | ?   | 00:00:04 | slack           |           |
-| 25364 | ?   | 00:00:00 | slack           |           |
-| 25374 | ?   | 00:03:57 | slack           |           |
-| 25391 | ?   | 00:00:00 | p11-kit-remote  |           |
-| 25764 | ?   | 00:00:01 | slack           |           |
-| 26202 | ?   | 00:00:43 | opera           |           |
-| 28564 | ?   | 00:29:27 | opera           |           |
-| 30941 | ?   | 00:00:00 | gvfsd-network   |           |
-| 30956 | ?   | 00:00:00 | gvfsd-dnssd     |           |
-| 31300 | ?   | 00:00:06 | eog             |           |
-| 34920 | ?   | 00:00:00 | gnome-terminal  |           |
-| 34923 | ?   | 00:00:00 | gnome-terminal. |           |
-| 35894 | ?   | 00:00:00 | opera           |           |
-| 36158 | ?   | 00:00:27 | emacs28         |           |
-| 36352 | ?   | 00:00:00 | ssh-agent       |           |
-| 37119 | ?   | 00:00:00 | bwrap           |           |
-| 37131 | ?   | 00:00:00 | bwrap           |           |
-| 37132 | ?   | 00:00:00 | xdg-dbus-proxy  |           |
-| 37134 | ?   | 00:00:00 | bwrap           |           |
-| 37135 | ?   | 00:00:00 | discord         |           |
-| 37136 | ?   | 00:00:00 | socat           |           |
-| 37140 | ?   | 00:00:09 | Discord         |           |
-| 37143 | ?   | 00:00:00 | cat             |           |
-| 37144 | ?   | 00:00:00 | cat             |           |
-| 37150 | ?   | 00:00:00 | Discord         |           |
-| 37152 | ?   | 00:00:00 | zypak-sandbox   | <defunct> |
-| 37155 | ?   | 00:00:00 | bwrap           |           |
-| 37163 | ?   | 00:00:00 | bwrap           |           |
-| 37164 | ?   | 00:00:00 | Discord         |           |
-| 37191 | ?   | 00:00:16 | Discord         |           |
-| 37205 | ?   | 00:00:01 | Discord         |           |
-| 37225 | ?   | 00:00:00 | Discord         |           |
-| 37258 | ?   | 00:00:00 | p11-kit-remote  |           |
-| 37260 | ?   | 00:01:02 | Discord         |           |
-| 37300 | ?   | 00:00:00 | Discord         |           |
-| 38226 | ?   | 00:00:00 | emacsql-sqlite  |           |
-| 38964 | ?   | 00:00:09 | opera           |           |
-| 39005 | ?   | 00:00:08 | opera           |           |
-| 39035 | ?   | 00:00:04 | opera           |           |
-| 39048 | ?   | 00:00:00 | opera           |           |
-| 39090 | ?   | 00:00:00 | opera           |           |
-| 39122 | ?   | 00:00:02 | opera           |           |
-| 39144 | ?   | 00:00:00 | opera           |           |
-| 39568 | ?   | 00:00:00 | opera           |           |
-| 39721 | ?   | 00:00:00 | zsh             |           |
-| 39722 | ?   | 00:00:00 | ps              |           |
-| 39723 | ?   | 00:00:00 | awk             |           |
-
 *** Print Cols
 #+begin_src shell
   ps | awk '{print $2}'
 #+end_src
 
-#+RESULTS:
-| TTY |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-| ?   |
-
-
 *** Delimitadores
 
 #+begin_src shell
-  cat /etc/passwd | awk -F ":" '{print $5}'
+ awk -F ":" '{print $5}' /etc/passwd
 #+end_src
-
-
 
 *** Print enhanced.
 
 **** Diferentes columnas
 #+begin_src shell
-ps -a | awk '{print $1 $2 $3}'
+ps -a | awk '{print $1, $2, $3}'
 #+end_src
 
 **** Delimitador de salida
@@ -710,9 +394,8 @@ ps -a | awk '{print $1" "$2" "$3}'
 
 **** Delimitador de salida a priori
 #+begin_src shell
-awk 'BEGIN{FS="/"; OFS="----"} {print $2, $6, $7}' /etc/passwd
+awk 'BEGIN{FS=":"; OFS=";"} {print $2, $6, $7}' /etc/passwd
 #+end_src
-
 
 *** Busqueda
 #+begin_src shell
