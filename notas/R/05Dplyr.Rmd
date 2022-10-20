@@ -26,7 +26,7 @@ flights
 
 Noten que lo que nos muestra R es muy diferente a lo que nos muestra con el `data.frame` normal:
 ```{r, eval = F}
-data.frame(flights)
+data.frame(head(flights))
 ```
 
 ## Tibble
@@ -137,6 +137,7 @@ arrange(flights, desc(dep_delay))
 ### Tratamiento de NA
 Los NA's van al final.
 ```{r}
+
 df <- tibble(x = c(5, 2, NA))
 arrange(df, x)
 ```
@@ -183,8 +184,9 @@ flights %>%
 Si sólo quieres las nuevas columnas, se puede usar `transmute()`:
 
 ```{r}
+library(magrittr)
 flights %>%
-    transmute(
+    mutate(
         speed=distance/ air_time * 60,
         speed2 = speed*2
     )
@@ -193,11 +195,14 @@ flights %>%
 Aritmética divertida con variables vectorizadas
 ```{r}
 flights %>%
-    transmute(
+    mutate(
         dep_time,
         hour = dep_time %/% 100,
-        minute = dep_time %% 100
-    )
+        minute = dep_time %% 100,
+        minutes = hour*60 + minute
+    ) %>%
+    select(hour, minute, minutes)
+
 ```
 
 Se pueden hacer sumas acumuladas y desfases.
