@@ -263,7 +263,7 @@ hace diario y entender cómo operarlos o cómo convertir de una a otra es muy ú
 
 ## Clases atómicas (atomic classes)
 
-R tiene 6 clases atómicas.
+R tiene 5 clases atómicas.
 
 - character (*caracter*)
 - numeric (números reales o decimales)
