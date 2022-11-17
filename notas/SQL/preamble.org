@@ -18,10 +18,10 @@ Para las pruebas necesitamos un ambiente de docker que pueda ser reemplazable. P
   docker stop postgres
   docker rm postgres
   docker run -p 5432:5432 \
-         -v postgresql-data:/var/lib/postgresql/data \
+         -v postgresql-data:/var/lib/postgresql/data \ #para que monte el volumen en este contenedor que estoy creando
          -e POSTGRES_PASSWORD=postgres \
          --name postgres \
-         -d postgres
+         -d postgres #que lo corra en background y no me muestre el postgres
 #+end_src
 
 #+RESULTS:
