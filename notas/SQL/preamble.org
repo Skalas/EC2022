@@ -14,7 +14,7 @@
 Para las pruebas necesitamos un ambiente de docker que pueda ser reemplazable. Para ello genero un nuevo contenedor con datos persistidos en la carpeta data dentro de sql.
 
 #+begin_src shell
-  docker volume create postgresql-data
+  docker volume create postgresql-data #crea un volumen para un contenedor
   docker stop postgres
   docker rm postgres
   docker run -p 5432:5432 \
