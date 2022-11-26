@@ -22,8 +22,6 @@ services:
       - "db"
   shiny: 
     build: ./shiny
-    env_file:
-      - ".env"
     ports:
       - 5000:4999
 volumes:

@@ -1,12 +1,11 @@
 from flask import Flask, request
+import json
 import psycopg2
 import psycopg2.extras
-import json
-import pandas as pd
-
+import os
 # Estructura del uri:
 # "motor://user:password@host:port/database"
-database_uri = "postgresql://postgres:postgres@db:5432/postgres"
+database_uri = f'postgresql://{os.environ["PGUSR"]}:{os.environ["PGPASS"]}@{os.environ["PGHOST"]}:5432/{os.environ["PGDB"]}'
 
 app = Flask(__name__)
 conn = psycopg2.connect(database_uri)

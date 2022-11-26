@@ -8,7 +8,7 @@ library(DT)
 ui <- fluidPage(
 
     # Application title
-    titlePanel("Old Faithful Geyser Data"),
+    titlePanel("Test Dashboard for EC2022"),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
@@ -35,7 +35,9 @@ server <- function(input, output) {
     observeEvent(input$save,{
         POST('web:8080/users', body=toJSON(data.frame(name=input$name,lastname=input$lastname, age=input$age)))
     }) 
+
     output$users = renderDataTable({
+        print(input$save)
         resp <- GET('web:8080/')
         df <- fromJSON(content(resp, as='text'))
         df
