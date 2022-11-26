@@ -30,11 +30,11 @@ def user():
         cur.close()
         return json.dumps(results._asdict(), default=str)
     if request.method == "POST":
-        user = request.json
+        user = json.loads(request.data)
         cur = conn.cursor()
         cur.execute(
             "insert into users (name, lastname, age) values (%s, %s, %s)",
-            (user["name"], user["lastname"], user["age"]),
+            (user[0]["name"], user[0]["lastname"], user[0]["age"]),
         )
         conn.commit()
         cur.execute("SELECT LASTVAL()")
@@ -49,16 +49,26 @@ def user():
         cur.close()
         return json.dumps({"user_id": user_id})
     if request.method == "PATCH":
-        user = request.json
+        user = json.loads(request.data)
         cur = conn.cursor()
         user_id = request.args.get("id")
         cur.execute(
             "update users set (name, lastname, age) = (%s,%s,%s) where id=%s ",
-            (user["name"], user["lastname"], user["age"], user_id),
+            (user[0]["name"], user[0]["lastname"], user[0]["age"], user_id),
         )
         conn.commit()
         cur.close()
         return json.dumps({"user_id": user_id})
+
+
+@app.route('/flights', methods=['GET'])
+def flights():
+    cur = conn.cursor(cursor_factory=psycopg2.extras.NamedTupleCursor)
+    user_id = request.args.get("id")
+    cur.execute(f"select * from flights limit 100")
+    results = cur.fetchall()
+    cur.close()
+    return json.dumps([x._asdict() for x in results], default=str)
 
 
 if __name__ == "__main__":

@@ -19,17 +19,13 @@ RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get clean
 
-# copy necessary files
-## renv.lock file
-COPY /vinos-app/renv.lock ./renv.lock
-## app folder
-COPY /vinos-app ./app
-
 # install renv & restore packages
-RUN Rscript -e 'install.packages("renv")'
-RUN Rscript -e 'renv::restore()'
+#RUN Rscript -e 'install.packages("renv")'
+#RUN Rscript -e 'renv::restore()'
 RUN R -e 'install.packages("tidyverse")'
+RUN R -e 'install.packages(c("httr", "jsonlite", "DT"))'
 
+COPY . app/
 # expose port
 EXPOSE 4999
 
